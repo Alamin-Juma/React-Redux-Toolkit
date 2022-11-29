@@ -7,10 +7,10 @@ import { onAuthStateChangedListener } from "./utils/firebase.utils";
 import { Login } from "./components/auth/Login";
 import { NavBar } from "./routes/navigation/NavBar";
 import { Shop } from "./routes/shop/Shop";
-import { Home } from './routes/home/Home'
+import { Home } from "./routes/home/Home";
+import { AddProducts } from './routes/addProducts/AddProducts'
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 
 function App() {
   const user = useSelector(selectUser);
@@ -43,8 +43,9 @@ function App() {
           <Router>
             <NavBar />
             <Routes>
-            <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/shop" element={<Shop />} />
+              <Route path="/addProds" element={<AddProducts />} />
             </Routes>
           </Router>
         </Fragment>

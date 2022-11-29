@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, selectUser } from "../../features/users/userSlice";
 
@@ -18,6 +18,19 @@ export const NavBar = () => {
     signOutUser();
   };
 
+  const navigate = useNavigate();
+  const route = (type) => {
+    switch (type) {
+      case "goToShop":
+        navigate("/shop");
+        break;
+      case "addProds":
+        navigate("/addProds");
+      default:
+        navigate("/");
+    }
+  };
+
   const user = useSelector(selectUser);
 
   return (
@@ -29,9 +42,12 @@ export const NavBar = () => {
           </Link>
         </div>
         <div className="nav-links-container">
-          <div className="nav-link" to="/shop">
+          <Link className="nav-link" to="/goToShop">
             GO TO SHOP
-          </div>
+          </Link>
+          <Link className="nav-link" to="/addProds">
+            ADD PRODUCTS
+          </Link>
           {user ? (
             <span className="nav-link" onClick={signOut}>
               SIGN OUT
