@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 
 import { Directory } from "../../components/directory/Directory";
 
@@ -7,7 +7,7 @@ export const Home = () => {
     {
       id: 1,
       name: "Office Desk",
-      imageUrl: "https://ibb.co/kS0d1Jb",
+      imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
     },
     {
       id: 2,
@@ -31,19 +31,19 @@ export const Home = () => {
     },
     ,
     {
-      id: 5,
+      id: 6,
       name: "Office Chair",
       imageUrl: "https://ibb.co/hdgywkw",
     },
     ,
     {
-      id: 5,
+      id: 7,
       name: "Recliner Sofas",
       imageUrl: "https://ibb.co/jyKz314",
     },
     ,
     {
-      id: 5,
+      id: 8,
       name: "Coffe Table",
       imageUrl: "https://ibb.co/ZdJspfG",
     },
@@ -51,7 +51,9 @@ export const Home = () => {
 
   return (
     <div>
-      <Directory categories={SHOP_DATA} />
+      <Fragment>
+        <Directory categories={SHOP_DATA} />
+      </Fragment>
     </div>
   );
 };

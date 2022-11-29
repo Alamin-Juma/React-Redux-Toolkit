@@ -37,23 +37,32 @@ export const NavBar = () => {
     <Fragment>
       <div className="navigation">
         <div>
-          <Link className="logo-container">
+          <Link className="logo-container" to="/">
             <img src={ecommerceLogo} className="logo" />
           </Link>
         </div>
         <div className="nav-links-container">
-          <Link className="nav-link" to="/goToShop">
-            GO TO SHOP
-          </Link>
-          <Link className="nav-link" to="/addProds">
-            ADD PRODUCTS
-          </Link>
           {user ? (
+            <>
+              <Link className="nav-link" to="/goToShop">
+                GO TO SHOP
+              </Link>
+              <Link className="nav-link" to="/addProds">
+                ADD PRODUCTS
+              </Link>
+            </>
+          ) : (
+            ""
+          )}
+
+          {!user ? (
+            <Link className="nav-link" to="/signIn">
+              SIGN IN
+            </Link>
+          ) : (
             <span className="nav-link" onClick={signOut}>
               SIGN OUT
             </span>
-          ) : (
-            ""
           )}
         </div>
       </div>

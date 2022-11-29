@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
+
 import {
   createUserDocumentFromAuth,
   signInWithGooglePopup,
@@ -9,7 +12,7 @@ import {
 import { useDispatch } from "react-redux";
 import { login } from "../../features/users/userSlice";
 
-import './Login.css'
+import "./Login.css";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,28 +28,35 @@ export const Login = () => {
       updateProfile(userAuth.user, {
         displayName: name,
         photoUrl: profilePic,
-      }).then(
-        dispatch(
-          login({
-            email: userAuth.user.email,
-            uid: userAuth.user.uid,
-            displayName: name,
-            photoUrl: profilePic,
-          })
-          .catch((error) => {
-              console.log('user not updated');
-          })
-        )
-      )
-      .catch((error) => {
-          alert(error)
       })
+        .then(
+          dispatch(
+            login({
+              email: userAuth.user.email,
+              uid: userAuth.user.uid,
+              displayName: name,
+              photoUrl: profilePic,
+            }).catch((error) => {
+              console.log("user not updated");
+            })
+          )
+        )
+        .catch((error) => {
+          alert(error);
+        });
     });
   };
 
+  const navigate = useNavigate();
+  const routeToHome = () => {
+    navigate("/");
+  };
+
+  const notify = () => toast.success('successfully logged in to site');
 
   const loginToApp = (event) => {
     event.preventDefault();
+    toast.loading('Redirecting...')
 
     signInAuthUserWithEmailAndPassword(email, password)
       .then((userAuth) => {
@@ -60,6 +70,8 @@ export const Login = () => {
           })
         );
       })
+      .then(() => notify())
+      .then(() => routeToHome())
       .catch((error) => {
         alert(error.message);
       });
@@ -97,6 +109,8 @@ export const Login = () => {
         <button type="submit" onClick={loginToApp}>
           Sign In
         </button>
+        <Toaster position="top-center" 
+                reverseOrder={true} />
       </form>
 
       <p>
@@ -108,4 +122,3 @@ export const Login = () => {
     </div>
   );
 };
-

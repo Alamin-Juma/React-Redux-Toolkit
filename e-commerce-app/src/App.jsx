@@ -8,7 +8,7 @@ import { Login } from "./components/auth/Login";
 import { NavBar } from "./routes/navigation/NavBar";
 import { Shop } from "./routes/shop/Shop";
 import { Home } from "./routes/home/Home";
-import { AddProducts } from './routes/addProducts/AddProducts'
+import { AddProducts } from "./routes/addProducts/AddProducts";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -36,20 +36,15 @@ function App() {
 
   return (
     <div className="App">
-      {!user ? (
-        <Login />
-      ) : (
-        <Fragment>
-          <Router>
-            <NavBar />
-            <Routes>
-              <Route path="/" element={<Home />} />
+      <Router>
+      <NavBar />
+        <Routes>     
+              <Route index element={<Home />} />
+              <Route path="/signIn" element={<Login />} />        
               <Route path="/shop" element={<Shop />} />
-              <Route path="/addProds" element={<AddProducts />} />
-            </Routes>
-          </Router>
-        </Fragment>
-      )}
+              <Route path="/addProds" element={<AddProducts />} />    
+        </Routes>
+      </Router>
     </div>
   );
 }
