@@ -1,13 +1,16 @@
 import { useState } from "react";
 
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./App.css";
 import { login, logout, selectUser } from "./features/users/userSlice";
 import { onAuthStateChangedListener } from "./utils/firebase.utils";
-import {Login} from "./components/auth/Login";
+import { Login } from "./components/auth/Login";
+import { NavBar } from "./routes/navigation/NavBar";
+import { Shop } from "./routes/shop/Shop";
+import { Home } from './routes/home/Home'
 
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 
 function App() {
   const user = useSelector(selectUser);
@@ -36,13 +39,15 @@ function App() {
       {!user ? (
         <Login />
       ) : (
-        <div className="app__body">
-          <div>
-            <h1>Hello {user.displayName}!</h1>
-            <p>{user.email}</p>
-            <img src={user.photoUrl} alt="" />
-          </div>
-        </div>
+        <Fragment>
+          <Router>
+            <NavBar />
+            <Routes>
+            <Route path="/home" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+            </Routes>
+          </Router>
+        </Fragment>
       )}
     </div>
   );
