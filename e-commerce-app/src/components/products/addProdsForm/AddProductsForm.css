@@ -40,3 +40,11 @@
     box-sizing: border-box;
     margin: 0 0 10px;
   }
+  .progress {
+    background-color: black;
+    color: rgb(247, 7, 7);
+    font-weight: bold;
+    font-size: 20px;
+    margin: 15px;
+    padding: 3px;
+  }

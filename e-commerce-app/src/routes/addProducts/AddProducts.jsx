@@ -35,9 +35,7 @@ export const AddProducts = () => {
     // }
 
   return (
-    <div>
-        Hello  Add some projects here
-    </div>
+    <AddProductsForm />
   )
 }
 

@@ -36,7 +36,8 @@ export const Login = () => {
               uid: userAuth.user.uid,
               displayName: name,
               photoUrl: profilePic,
-            }).catch((error) => {
+            })
+            .catch((error) => {
               console.log("user not updated");
             })
           )
@@ -45,6 +46,8 @@ export const Login = () => {
           alert(error);
         });
     });
+     routeToHome()
+
   };
 
   const navigate = useNavigate();

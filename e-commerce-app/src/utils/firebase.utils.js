@@ -14,21 +14,24 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, addDoc, collection,  doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC_pbqpN93F1RUr94JmTacC9sBaeDzhEEU",
-
-  authDomain: "redux-toolkit-ecommerce.firebaseapp.com",
-
-  projectId: "redux-toolkit-ecommerce",
-
-  storageBucket: "redux-toolkit-ecommerce.appspot.com",
-
-  messagingSenderId: "869453733397",
-
-  appId: "1:869453733397:web:1c23b53c0ac60385cb381c",
+  apiKey: "AIzaSyBGD-OiSOUBhZpuaCkTseKSZLVSyTZXaag",
+  authDomain: "ecom-rtk.firebaseapp.com",
+  projectId: "ecom-rtk",
+  storageBucket: "ecom-rtk.appspot.com",
+  messagingSenderId: "497486491032",
+  appId: "1:497486491032:web:2f9220e232a4d210e80fed",
 };
 
 // Initialize Firebase
@@ -85,5 +88,5 @@ export const signOutUser = async () => signOut(auth);
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
 
-
-
+// Firebase storage reference
+export const storage = getStorage(app);
