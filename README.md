@@ -15,3 +15,6 @@ an e-commerce-app utilizing Redux-toolkit, RTK query  and firebase for Auth and 
 
 ## add data to firestore database
 ![](e-commerce-app/images/ala5.JPG)
+
+## Display payload shop data  from firestore
+![](e-commerce-app/images/ala6.JPG)
