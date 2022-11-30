@@ -1,6 +1,6 @@
 // Or from '@reduxjs/toolkit/query' if not using the auto-generated hooks
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
-import { serverTimestamp } from 'firebase/firestore'
+import { getDocs, serverTimestamp } from 'firebase/firestore'
 import {
     getFirestore,
     addDoc,
@@ -17,8 +17,21 @@ export const productsServiceApi = createApi({
     baseQuery: fakeBaseQuery({ baseUrl: '/' }),
     endpoints: (builder) => ({
         fetchProducts: builder.query({
-            queryFn() {
-                return { data: 'ok' }
+            async queryFn() {
+                try {
+                    const productRef = collection(db, 'products');
+                    const querySnapshot = await getDocs(productRef);
+                    let productItems = [];
+                    querySnapshot?.forEach((doc) => {
+                        productItems.push({
+                            id: doc.id,
+                            ...doc.data()
+                        })
+                    })
+                    return {data: productItems}
+                } catch (e) {
+                    return { error: e }
+                }
             }
         }),
         addProducts: builder.mutation({ 
@@ -31,6 +44,7 @@ export const productsServiceApi = createApi({
                 } catch (e) {
                     return {error: e}
                 }
+                return { data: 'ok'}
             }
         })
     }),

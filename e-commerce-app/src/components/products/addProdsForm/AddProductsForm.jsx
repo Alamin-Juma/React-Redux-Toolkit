@@ -6,7 +6,14 @@ import { useNavigate } from "react-router-dom";
 import {useAddProductsMutation} from '../../../features/products_service/productsService'
 import { storage } from "../../../utils/firebase.utils";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
+import {
+  getFirestore,
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 import "./AddProductsForm.css";
 
 const initialState = {

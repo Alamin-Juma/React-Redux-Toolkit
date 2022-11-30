@@ -44,7 +44,7 @@ export const NavBar = () => {
         <div className="nav-links-container">
           {user ? (
             <>
-              <Link className="nav-link" to="/goToShop">
+              <Link className="nav-link" to="/shop">
                 GO TO SHOP
               </Link>
               <Link className="nav-link" to="/addProds">
