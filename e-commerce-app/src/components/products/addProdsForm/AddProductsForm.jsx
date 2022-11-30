@@ -6,31 +6,27 @@ import { useNavigate } from "react-router-dom";
 import {useAddProductsMutation} from '../../../features/products_service/productsService'
 import { storage } from "../../../utils/firebase.utils";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import {
-  getFirestore,
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  setDoc,
-} from "firebase/firestore";
-import "./AddProductsForm.css";
 
-const initialState = {
-  id: "",
-  name: "",
-  price: "",
-};
+import './AddProductsForm.css'
+
 
 export const AddProductsForm = () => {
+  const [id, setId] = useState(0)
+  // Date.now() best for random id set for initial state doc
+  const initialState = {
+    id: Date.now(),
+    name: "",
+    price: null,
+  };
   const [data, setData] = useState(initialState);
   const [file, setFile] = useState(null);
   // progress
   const [percent, setPercent] = useState(0);
 
-const [addProducts] = useAddProductsMutation()
+  
 
-  const { name, price } = data;
+const [addProducts] = useAddProductsMutation()
+  let {  name, price } = data;
 
   
   const navigate = useNavigate();
@@ -80,11 +76,10 @@ const [addProducts] = useAddProductsMutation()
     file && handleUpload();
   }, [file]);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(name && price ) {
-      await addProducts(data)
+      await addProducts( data)
     }
     routeToShop()
   }
@@ -114,7 +109,7 @@ const [addProducts] = useAddProductsMutation()
 
         <label>
           <span>Price</span>
-          <input type="text" value={price} name="price" onChange={handleChange} />
+          <input type="number" value={price} name="price" onChange={handleChange} />
         </label>
 
         <button

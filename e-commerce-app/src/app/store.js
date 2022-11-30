@@ -1,9 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { setupListeners} from '@reduxjs/toolkit/query/react'
 
 import userReducer from '../features/users/userSlice'
 
 import {productsServiceApi}  from '../features/products_service/productsService'
+
+// const custmizedMiddleware = getDefaultMiddleware ({
+//     serializableCheck: false,
+// })
 
 export const store =  configureStore({
   reducer: {
