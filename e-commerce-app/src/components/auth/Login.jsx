@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 
 import {
@@ -18,7 +18,6 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [profilePic, setProfilePic] = useState("");
   const dispatch = useDispatch();
 
   const register = () => {
@@ -35,7 +34,6 @@ export const Login = () => {
               email: userAuth.user.email,
               uid: userAuth.user.uid,
               displayName: name,
-              photoUrl: profilePic,
             })
             .catch((error) => {
               console.log("user not updated");
@@ -69,7 +67,6 @@ export const Login = () => {
             email: userAuth.user.email,
             uid: userAuth.user.uid,
             displayName: userAuth.user.displayName,
-            photoUrl: userAuth.user.photoURL,
           })
         );
       })
@@ -84,19 +81,6 @@ export const Login = () => {
     <div className="login">
       <img src="Linkedin_Logo_text.svg" alt="" />
       <form>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Full name (required if registering)"
-          type="text"
-        />
-
-        <input
-          value={profilePic}
-          onChange={(e) => setProfilePic(e.target.value)}
-          placeholder="Profile picture URL (optional)"
-          type="text"
-        />
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -118,9 +102,11 @@ export const Login = () => {
 
       <p>
         Not a member?{" "}
-        <span className="login__register" onClick={register}>
+        <Link  to="/signup">
+        <span className="login__register">
           Register Now
         </span>
+        </Link>    
       </p>
     </div>
   );

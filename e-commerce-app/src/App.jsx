@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/users/userSlice";
 import { onAuthStateChangedListener } from "./utils/firebase.utils";
 import { Login } from "./components/auth/Login";
+import { Register } from "./components/auth/Register";
+
 import { NavBar } from "./routes/navigation/NavBar";
 import { Shop } from "./routes/shop/Shop";
 import { Home } from "./routes/home/Home";
@@ -40,7 +42,8 @@ function App() {
       <NavBar />
         <Routes>     
               <Route index element={<Home />} />
-              <Route path="/signIn" element={<Login />} />        
+              <Route path="/signIn" element={<Login />} />   
+              <Route path="/signup" element={<Register />} />             
               <Route path="/shop" element={<Shop />} />
               <Route path="/addProds" element={<AddProducts />} />    
         </Routes>
