@@ -12,7 +12,6 @@ export const CategoryItem = ({ category }) => {
       />
       <div className='category-body-container'>
         <h2>{name}</h2>
-        <p>Shop Now</p>
       </div>
     </div>
   );
