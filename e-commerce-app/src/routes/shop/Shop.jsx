@@ -1,7 +1,7 @@
 import React from "react";
 import { ProductCard } from "../../components/productCard/ProductCard";
 
-import { useFetchProductsQuery } from "../../features/products_service/productsService";
+import { useFetchProductsQuery } from "../../features/products/productsService";
 
 import "./Shop.css";
 export const Shop = () => {

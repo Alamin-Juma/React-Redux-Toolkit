@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 // initially an empty array of products
 const initialState = []
@@ -31,18 +31,33 @@ export const cartSlice = createSlice({
           // filter the products to only the catItems except the existingCartItem
           return state.filter((cartProducts) => cartProducts.id !== existingCartItem.id); 
       },
+      totalQuantity: (state,action) => {
+        return state.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)
+      },
       onClearCart: (state) => {
         return []
-      }
+      },
+      toggleCart: (state) => {
+        state.cart_isOpen = !state.cart_isOpen;
+      }    
     },
   });
   
-  export const { login, logout } = userSlice.actions;
+  export const { onAddItemsToCart, onIncrementProduct,  onDecrementProduct, onRemoveCartItem, onClearCart, toggleCart } = cartSlice.actions;
   
-  // selectors
-  export const selectUser = (state) => state.user.user;
-  //   const posts = useSelector((state) => state.posts);
-  
-  export default userSlice.reducer;
+  export const cartReducer = cartSlice.reducer
 
-  
+
+  // selectors., after state in cart now 
+  const cartSelector = (state) => state.cart;
+
+ export const cartTotalSelector = createSelector([cartSelector], (cart) =>
+  cart.reduce((total, current) => (total += current.quantity), 0)
+);
+
+export const cartTotalPriceSelector = createSelector([cartSelector], (cart) =>
+  cart.reduce(
+    (total, current) => (total += current.price * current.quantity),
+    0
+  )
+);
