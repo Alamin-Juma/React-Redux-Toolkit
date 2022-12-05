@@ -3,12 +3,16 @@ import React, { Fragment } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, selectUser } from "../../features/users/userSlice";
+import {toggle } from '../../features/cart/toggleSlice'
 
 import { signOutUser } from "../../utils/firebase.utils";
 
 import ecommerceLogo from "../../assets/download.png";
+import { AiOutlineShopping } from 'react-icons/ai'
+
 
 import "./Nav.styles.css";
+import {CartDropdown} from "../../components/cart/cart-dropdown/Cart-dropdown";
 
 export const NavBar = () => {
   const dispatch = useDispatch();
@@ -33,6 +37,9 @@ export const NavBar = () => {
 
   const user = useSelector(selectUser);
 
+  const uiToggle = useSelector((state) => state.toggleCart);
+
+
   return (
     <Fragment>
       <div className="navigation">
@@ -50,6 +57,7 @@ export const NavBar = () => {
               <Link className="nav-link" to="/addProds">
                 ADD PRODUCTS
               </Link>
+              
             </>
           ) : (
             ""
@@ -60,10 +68,14 @@ export const NavBar = () => {
               SIGN IN
             </Link>
           ) : (
+            <>
             <span className="nav-link" onClick={signOut}>
               SIGN OUT
             </span>
-          )}
+            <span className="nav-link" >{<AiOutlineShopping  onClick={() => dispatch(toggle())}/>}</span></>
+          )
+          }
+          {uiToggle.cartIsOpen &&  <CartDropdown />}
         </div>
       </div>
     </Fragment>

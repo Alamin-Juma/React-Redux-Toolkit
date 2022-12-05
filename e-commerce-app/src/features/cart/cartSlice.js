@@ -36,19 +36,17 @@ export const cartSlice = createSlice({
       },
       onClearCart: (state) => {
         return []
-      },
-      toggleCart: (state) => {
-        state.cart_isOpen = !state.cart_isOpen;
-      }    
+      },   
     },
   });
   
-  export const { onAddItemsToCart, onIncrementProduct,  onDecrementProduct, onRemoveCartItem, onClearCart, toggleCart } = cartSlice.actions;
+  export const { onAddItemsToCart, onIncrementProduct,  onDecrementProduct, onRemoveCartItem, onClearCart } = cartSlice.actions;
   
   export const cartReducer = cartSlice.reducer
 
 
   // selectors., after state in cart now 
+
   const cartSelector = (state) => state.cart;
 
  export const cartTotalSelector = createSelector([cartSelector], (cart) =>

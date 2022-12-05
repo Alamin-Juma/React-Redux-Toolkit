@@ -11,6 +11,7 @@ import { NavBar } from "./routes/navigation/NavBar";
 import { Shop } from "./routes/shop/Shop";
 import { Home } from "./routes/home/Home";
 import { AddProducts } from "./routes/addProducts/AddProducts";
+import { PageNotFound } from "./components/pageNotFound/PageNotFound";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -39,13 +40,19 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <NavBar />
-        <Routes>     
-              <Route index element={<Home />} />
-              <Route path="/signIn" element={<Login />} />   
-              <Route path="/signup" element={<Register />} />             
+        <NavBar />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/signIn" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+          {user ? (
+            <>
               <Route path="/shop" element={<Shop />} />
-              <Route path="/addProds" element={<AddProducts />} />    
+              <Route path="/addProds" element={<AddProducts />} />
+            </>
+          ) : (
+            <Route path="/pageNotFound" element={<PageNotFound />} />
+          )}
         </Routes>
       </Router>
     </div>
