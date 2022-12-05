@@ -9,12 +9,18 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 import './AddProductsForm.css'
 
+import {
+  getFirestore,
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 
 export const AddProductsForm = () => {
-  const [id, setId] = useState(0)
-  // Date.now() best for random id set for initial state doc
   const initialState = {
-    id: Date.now(),
+    id: Math.random() * 100 ,
     name: "",
     price: null,
   };

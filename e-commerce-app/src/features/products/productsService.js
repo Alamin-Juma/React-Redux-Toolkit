@@ -41,7 +41,7 @@ export const productsServiceApi = createApi({
         try {
           await addDoc(collection(db, "products"), {
             ...data,
-            timestamp: serverTimestamp(),
+            // timestamp: serverTimestamp(),
           });
         } catch (e) {
           return { error: e };
