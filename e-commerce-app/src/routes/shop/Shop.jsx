@@ -16,7 +16,6 @@ export const Shop = () => {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      {          console.log(data)}
     </div>
   );
 };

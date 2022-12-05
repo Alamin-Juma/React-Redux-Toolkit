@@ -3,16 +3,23 @@ import {Button} from '../button/Button';
 import {  onAddItemsToCart } from "../../features/cart/cartSlice";
 
 import { useDispatch, useSelector } from "react-redux";
+import { useFetchProductsQuery } from "../../features/products/productsService";
+
 
 import './ProductCard.css';
 
 export const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
 
+  const { data, isLoading } = useFetchProductsQuery();
+
+
   const dispatch = useDispatch();
 
    const addProductToCart = () => {
      dispatch( onAddItemsToCart(product));
+    // console.log(data);
+
    }
 
   return (
