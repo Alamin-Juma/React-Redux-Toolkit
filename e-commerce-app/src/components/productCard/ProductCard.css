@@ -31,7 +31,7 @@ button {
 }
 
 .footer {
-  width: 100%;
+  width: 80%;
   height: 5%;
   display: flex;
   justify-content: space-between;
@@ -40,8 +40,16 @@ button {
 .name {
   width: 90%;
   margin-bottom: 15px;
+  color: rgb(218, 30, 30);
+ 
+}
+.price-name, .price, .name {
+  font-weight: bolder;
+  font-size: x-large;
 }
 
 .price {
   width: 10%;
+  color: blue;
+  margin-left: 10px;
 }

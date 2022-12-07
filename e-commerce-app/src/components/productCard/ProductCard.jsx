@@ -19,7 +19,8 @@ export const ProductCard = ({ product }) => {
       <img src={imageUrl} alt={`${name}`} />
       <div className="footer">
         <span className="name">{name}</span>
-        <span className="price">{price}</span>
+        <h4 className="price-name">Price:</h4>
+        <span className="price"> ${price}</span>
       </div>
       <Button buttonType="inverted" onClick={() => dispatch(onAddItemsToCart(product))}>
         Add to cart

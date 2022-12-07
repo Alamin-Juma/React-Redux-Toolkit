@@ -58,7 +58,7 @@ export const Register = () => {
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Full name (required if registering)"
+          placeholder="Full name"
           type="text"
         />
 
