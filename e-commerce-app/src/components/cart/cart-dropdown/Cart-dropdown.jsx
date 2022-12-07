@@ -5,6 +5,7 @@ import {
   AiOutlinePlus,
   AiOutlineLeft,
   AiOutlineShopping,
+  AiOutlineDelete,
 } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
 import toast from "react-hot-toast";
@@ -77,7 +78,7 @@ export const CartDropdown = () => {
                     <h4>${item.price}</h4>
                   </div>
                   <div className="flex bottom">
-                    <div>
+                    <div className="cart-feature__wwrapper">
                       <p className="quantity-desc">
                         <span
                           className="minus"
@@ -93,17 +94,9 @@ export const CartDropdown = () => {
                           onClick={() => dispatch(onIncrementProduct(item.id))}
                         >
                           <AiOutlinePlus />
-                        </span>
-                        {/* <span>
-                          <button
-                            type="button"
-                            className="remove-item"
-                            onClick=""
-                          >
-                            <TiDeleteOutline />
-                          </button>
-                        </span> */}
+                        </span> 
                       </p>
+                      <AiOutlineDelete />
                     </div>
                   </div>
                 </div>
