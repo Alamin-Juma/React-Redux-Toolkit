@@ -8,7 +8,6 @@ import "./Shop.css";
 export const Shop = () => {
   const { data, isLoading } = useFetchProductsQuery();
 
-
   return (
     <div>
       <div className="products-container">

@@ -7,16 +7,9 @@ import {useAddProductsMutation} from '../../../features/products/productsService
 import { storage } from "../../../utils/firebase.utils";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-import './AddProductsForm.css'
 
-import {
-  getFirestore,
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  setDoc,
-} from "firebase/firestore";
+
+import './AddProductsForm.css'
 
 export const AddProductsForm = () => {
   const initialState = {
@@ -28,6 +21,8 @@ export const AddProductsForm = () => {
   const [file, setFile] = useState(null);
   // progress
   const [percent, setPercent] = useState(0);
+
+
 
   
 
@@ -93,6 +88,7 @@ const [addProducts] = useAddProductsMutation()
 
   return (
     <div className="create">
+    
       <h2 className="page-title">Add a New Product to Database</h2>
       <form onSubmit={handleSubmit}>
         <label>

@@ -1,35 +1,135 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import {
+  AiOutlineMinus,
+  AiOutlinePlus,
+  AiOutlineLeft,
+  AiOutlineShopping,
+} from "react-icons/ai";
+import { TiDeleteOutline } from "react-icons/ti";
+import toast from "react-hot-toast";
+
 import { useDispatch, useSelector } from "react-redux";
+import { toggle } from "../../../features/cart/toggleSlice";
+import {
+  onIncrementProduct,
+  onDecrementProduct,
+  onRemoveCartItem,
+  onClearCart,
+} from "../../../features/cart/cartSlice";
 
-import {  onAddItemsToCart, onIncrementProduct,  onDecrementProduct, onRemoveCartItem, onClearCart, cartTotalPriceSelector } from "../../../features/cart/cartSlice";
-
-
-import { Button } from '../../../components/button/Button'
-import { CartItem } from '../cart-item/Cart-Item'
-
-import './Cart-dropdown.css'
+import "./Cart-dropdown.css";
 
 export const CartDropdown = () => {
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
-  const totalPrice = useSelector(cartTotalPriceSelector);
+  // const totalPrice = useSelector(cartTotalPriceSelector);
 
-  const goToCheckOut = () => {
+  const getTotalQuantity = () => {
+    let total = 0;
+    cart.map((item) => {
+      total += item.quantity;
+    });
+    return total;
+  };
 
-  }
+  const goToCheckOut = () => {};
 
   return (
-    <div>
-      <div className="cart-dropdown-container">
-        <div className="cart-items">
-          {cart.map((cartItem) => {
-            <CartItem key={cartItem.id} cartItem={cart} />
-          })}
+    <div className="cart-wrapper">
+      <div className="cart-container">
+        <button
+          type="button"
+          className="cart-heading"
+          onClick={() => dispatch(toggle())}
+        >
+          <AiOutlineLeft />
+          <span className="heading">Your Cart</span>
+          <span className="cart-num-items">({getTotalQuantity()} items)</span>
+        </button>
+        {cart.length < 1 && (
+          <div className="empty-cart">
+            <AiOutlineShopping size={150} />
+            <h3>Your shopping bag is empty</h3>
+            <Link
+              href="/shop
+            "
+            >
+              <button
+                type="button"
+                onClick={() => dispatch(toggle())}
+                className="btn"
+              >
+                Continue Shopping
+              </button>
+            </Link>
+          </div>
+        )}
+        <div className="product-container">
+          {cart.length >= 1 &&
+            cart.map((item) => (
+              <div className="product" key={item.id}>
+                <img src={item.imageUrl} className="cart-product-image" />
+                <div className="item-desc">
+                  <div className="flex top">
+                    <h5>{item.name}</h5>
+                    <h4>${item.price}</h4>
+                  </div>
+                  <div className="flex bottom">
+                    <div>
+                      <p className="quantity-desc">
+                        <span
+                          className="minus"
+                          onClick={() => dispatch(onDecrementProduct(item.id))}
+                        >
+                          <AiOutlineMinus />
+                        </span>
+                        <span className="num" onClick="">
+                          {item.quantity}
+                        </span>
+                        <span
+                          className="plus"
+                          onClick={() => dispatch(onIncrementProduct(item.id))}
+                        >
+                          <AiOutlinePlus />
+                        </span>
+                        {/* <span>
+                          <button
+                            type="button"
+                            className="remove-item"
+                            onClick=""
+                          >
+                            <TiDeleteOutline />
+                          </button>
+                        </span> */}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          {cart.length >= 1 && (
+            <h3 className="clear-cart" onClick={() => dispatch(onClearCart())}>
+              Clear Cart
+            </h3>
+          )}
         </div>
-        <Button onClick={goToCheckOut}>CHECKOUT</Button>
+
+        {cart.length >= 1 && (
+          <div className="cart-bottom">
+            <div className="total">
+              <h3>Subtotal:</h3>
+              <h3>100</h3>
+            </div>
+            <div className="btn-container">
+              <button type="button" className="btn" onClick="">
+                Pay with Stripe
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
-

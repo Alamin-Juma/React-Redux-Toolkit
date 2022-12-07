@@ -3,19 +3,27 @@ import React, { Fragment } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, selectUser } from "../../features/users/userSlice";
-import {toggle } from '../../features/cart/toggleSlice'
+import { toggle } from "../../features/cart/toggleSlice";
 
 import { signOutUser } from "../../utils/firebase.utils";
 
 import ecommerceLogo from "../../assets/download.png";
-import { AiOutlineShopping } from 'react-icons/ai'
-
+import { AiOutlineShopping } from "react-icons/ai";
 
 import "./Nav.styles.css";
-import {CartDropdown} from "../../components/cart/cart-dropdown/Cart-dropdown";
+import { CartDropdown } from "../../components/cart/cart-dropdown/Cart-dropdown";
 
 export const NavBar = () => {
   const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart);
+  const getTotalQuantity = () => {
+    let total = 0;
+    cart.map((item) => {
+      total += item.quantity;
+    });
+    return total;
+  };
 
   const signOut = () => {
     dispatch(logout());
@@ -39,7 +47,6 @@ export const NavBar = () => {
 
   const uiToggle = useSelector((state) => state.toggleCart);
 
-
   return (
     <Fragment>
       <div className="navigation">
@@ -57,7 +64,6 @@ export const NavBar = () => {
               <Link className="nav-link" to="/addProds">
                 ADD PRODUCTS
               </Link>
-              
             </>
           ) : (
             ""
@@ -69,13 +75,16 @@ export const NavBar = () => {
             </Link>
           ) : (
             <>
-            <span className="nav-link" onClick={signOut}>
-              SIGN OUT
-            </span>
-            <span className="nav-link" >{<AiOutlineShopping  onClick={() => dispatch(toggle())}/>}</span></>
-          )
-          }
-          {uiToggle.cartIsOpen &&  <CartDropdown />}
+              <span className="nav-link" onClick={signOut}>
+                SIGN OUT
+              </span>
+              <span className="nav-link">
+                {<AiOutlineShopping onClick={() => dispatch(toggle())} />}
+                <span className="item-count">{getTotalQuantity() || 0}</span>
+              </span>
+            </>
+          )}
+          {uiToggle.cartIsOpen && <CartDropdown />}
         </div>
       </div>
     </Fragment>
