@@ -13,11 +13,8 @@ an e-commerce-app utilizing Redux toolkit, RTK query, and firebase for Auth and 
 ## change navbar with Logout and view products/cart/add products to firestore
 ![](e-commerce-app/images/ala3.JPG)
 
-## add products to firestore 
-![](e-commerce-app/images/ala8.JPG)
-
 ## add data to firestore database
-![](e-commerce-app/images/ala3.JPG)
+![](e-commerce-app/images/ala8.JPG)
 ![](e-commerce-app/images/ala7.JPG)
 
 ## fetch and  Display payload shop data  from firestore after adding product data 
@@ -27,6 +24,6 @@ an e-commerce-app utilizing Redux toolkit, RTK query, and firebase for Auth and 
 ![](e-commerce-app/images/ala5.JPG)
 
 ## Add items to cart state. can clear all cart items. can decrease or increase cart quantity items. display tottal price of all cart items 
-![](e-commerce-app/images/ala7.JPG)
+![](e-commerce-app/images/ala6.JPG)
 
 
