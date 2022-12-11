@@ -50,7 +50,7 @@ export const Login = () => {
 
   const navigate = useNavigate();
   const routeToHome = () => {
-    navigate("/");
+    navigate("/shop");
   };
 
   const notify = () => toast.success('successfully logged in to site');

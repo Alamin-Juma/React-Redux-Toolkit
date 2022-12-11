@@ -19,21 +19,27 @@ export const cartSlice = createSlice({
         state.push({ ...action.payload, quantity: 1 });
       }
     },
-    onIncrementProduct: (state, action) => {
-      const { id } = action.payload;
-      const item = state.find((cartProduct) => cartProduct.id === id);
-      item.quantity++;
-    },
-    onDecrementProduct: (state, action) => {
-      const { id } = action.payload;
-      const item = state.find((cartProduct) => cartProduct.id === id);
-      item.quantity === 1 ? (item.quantity = 1) : item.quantity--;
-    },
-    onRemoveCartItem: (state, action) => {
-      // find the cart item to remove
-      const existingCartItem = cartItems.find(
-        (cartItem) => cartItem.id === cartItemToRemove.id
+    onIncrementProduct: (state, { payload }) => {
+      return state.map((cartItem) =>
+      cartItem.id === payload
+          ? {
+              ...cartItem,
+              quantity: cartItem.quantity + 1,
+            }
+          : cartItem
       );
+    },
+    onDecrementProduct: (state, {payload}) => {
+      return state.map((item) =>
+        item.id === payload && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+      );
+    },
+    toggleCartQuantity: (state, action) => {
+      const { id, value } = action.payload;
+    },
+    onRemoveCartItem: (state, {payload}) => {
+      // find the cart item to remove
+      const existingCartItem = state.find((cartItem) => cartItem.id === payload);
 
       // filter the products to only the catItems except the existingCartItem
       return state.filter(
@@ -46,13 +52,14 @@ export const cartSlice = createSlice({
         .toFixed(2);
     },
     onClearCart: (state) => {
-      return [];
+      return (state = []);
     },
   },
 });
 
 export const {
   onAddItemsToCart,
+  totalQuantity,
   onIncrementProduct,
   onDecrementProduct,
   onRemoveCartItem,
@@ -65,7 +72,7 @@ export const cartReducer = cartSlice.reducer;
 
 const cartSelector = (state) => state.cart;
 
-export const cartTotalSelector = createSelector([cartSelector], (cart) =>
+export const cartTotalItemSelector = createSelector([cartSelector], (cart) =>
   cart.reduce((total, current) => (total += current.quantity), 0)
 );
 

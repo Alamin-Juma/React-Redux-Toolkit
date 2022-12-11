@@ -16,6 +16,8 @@ import {
   onIncrementProduct,
   onDecrementProduct,
   onRemoveCartItem,
+  totalQuantity,
+  cartTotalPriceSelector,
   onClearCart,
 } from "../../../features/cart/cartSlice";
 
@@ -25,7 +27,7 @@ export const CartDropdown = () => {
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
-  // const totalPrice = useSelector(cartTotalPriceSelector);
+  const totalPrice = useSelector(cartTotalPriceSelector);
 
   const getTotalQuantity = () => {
     let total = 0;
@@ -80,23 +82,28 @@ export const CartDropdown = () => {
                   <div className="flex bottom">
                     <div className="cart-feature__wwrapper">
                       <p className="quantity-desc">
-                        <span
-                          className="minus"
-                          onClick={() => dispatch(onDecrementProduct(item.id))}
-                        >
-                          <AiOutlineMinus />
+                        <span className="minus">
+                          <AiOutlineMinus
+                            onClick={() =>
+                              dispatch(onDecrementProduct(item.id))
+                            }
+                          />
                         </span>
-                        <span className="num" onClick="">
-                          {item.quantity}
+                        <span className="num">{item.quantity}</span>
+                        <span className="plus">
+                          <AiOutlinePlus
+                            onClick={() =>
+                              dispatch(onIncrementProduct(item.id))
+                            }
+                          />
                         </span>
-                        <span
-                          className="plus"
-                          onClick={() => dispatch(onIncrementProduct(item.id))}
-                        >
-                          <AiOutlinePlus />
-                        </span> 
                       </p>
-                      <AiOutlineDelete />
+                      <span className="delete">
+                      <AiOutlineDelete
+                        onClick={() => dispatch(onRemoveCartItem(item.id))}
+                      />
+                      </span>
+                     
                     </div>
                   </div>
                 </div>
@@ -113,7 +120,7 @@ export const CartDropdown = () => {
           <div className="cart-bottom">
             <div className="total">
               <h3>Subtotal:</h3>
-              <h3>100</h3>
+              <h3>{totalPrice}</h3>
             </div>
             <div className="btn-container">
               <button type="button" className="btn" onClick="">
