@@ -7,7 +7,7 @@ import { toggle } from "../../features/cart/toggleSlice";
 
 import { signOutUser } from "../../utils/firebase.utils";
 
-import ecommerceLogo from "../../assets/download.png";
+import ecommerceLogo from "../../assets/download.webp";
 import { AiOutlineShopping } from "react-icons/ai";
 
 import "./Nav.styles.css";

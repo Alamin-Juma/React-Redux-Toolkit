@@ -16,7 +16,6 @@ import {
   onIncrementProduct,
   onDecrementProduct,
   onRemoveCartItem,
-  totalQuantity,
   cartTotalPriceSelector,
   onClearCart,
 } from "../../../features/cart/cartSlice";
@@ -98,7 +97,7 @@ export const CartDropdown = () => {
                           />
                         </span>
                       </p>
-                      <span className="delete">
+                      <span className="remove-item">
                       <AiOutlineDelete
                         onClick={() => dispatch(onRemoveCartItem(item.id))}
                       />

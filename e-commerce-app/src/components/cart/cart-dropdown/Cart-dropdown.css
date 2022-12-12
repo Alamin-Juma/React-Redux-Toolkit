@@ -759,7 +759,7 @@ span.text-red {
     width: 300px;
     margin: auto;
   }
-  .delete{
+  .delete:hover{
     cursor: pointer;
   }
 }

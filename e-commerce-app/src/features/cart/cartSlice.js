@@ -46,11 +46,6 @@ export const cartSlice = createSlice({
         (cartProducts) => cartProducts.id !== existingCartItem.id
       );
     },
-    totalQuantity: (state, action) => {
-      return state
-        .reduce((acc, item) => acc + item.quantity * item.price, 0)
-        .toFixed(2);
-    },
     onClearCart: (state) => {
       return (state = []);
     },
@@ -59,7 +54,6 @@ export const cartSlice = createSlice({
 
 export const {
   onAddItemsToCart,
-  totalQuantity,
   onIncrementProduct,
   onDecrementProduct,
   onRemoveCartItem,

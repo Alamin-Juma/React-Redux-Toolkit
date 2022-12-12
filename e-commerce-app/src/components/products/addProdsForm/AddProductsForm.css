@@ -2,6 +2,8 @@
     color: #555;
     max-width: 450px;
     margin: 60px auto;
+    display: flex;
+    flex-direction: column;
   }
   .create label span {
     display: block;
@@ -11,19 +13,7 @@
     margin-top: 10px;
     font-size: 0.8em;
   }
-  .create button {
-    display: block;
-    width: 100px;
-    font-size: 1em;
-    color: #fff;
-    padding: 8px 20px;
-    border: 0;
-    border-radius: 4px;
-    background-color: #58249c;
-    cursor: pointer;
-    text-decoration: none;
-    margin: 20px auto;
-  }
+  
   .ingredients {
     display: flex;
     align-items: center;
@@ -48,3 +38,6 @@
     margin: 15px;
     padding: 3px;
   }
+  .btn {
+    margin-top: 300px;
+  } 
